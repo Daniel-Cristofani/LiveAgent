@@ -3,6 +3,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 	</head>
 	<body>
+	
+	<button onclick="myFunction()">What is the time?</button>
+	
 <style type='text/css'>
 	.embeddedServiceHelpButton .helpButton .uiButton {
 		background-color: #005290;
@@ -15,6 +18,7 @@
 
 <script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
 <script type='text/javascript'>
+	function myFunction(){
 	var initESW = function(gslbBaseURL) {
 		embedded_svc.settings.displayHelpButton = true; //Or false
 		embedded_svc.settings.language = ''; //For example, enter 'en' or 'en-US'
@@ -64,6 +68,8 @@
 	} else {
 		initESW('https://service.force.com');
 	}
+	}
 </script>
 </body>
 </html>
+
