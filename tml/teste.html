@@ -4,25 +4,116 @@
 </head>
 <body>
 
-	<input type=hidden name="oid" value="00D180000009IgK">
-	<input type=hidden name="retURL" value="http://">
+	<style type='text/css'>
+	.embeddedServiceHelpButton .helpButton .uiButton {
+		background-color: #005290;
+		font-family: "Arial", sans-serif;
+	}
+	.embeddedServiceHelpButton .helpButton .uiButton:focus {
+		outline: 1px solid #005290;
+	}
+</style>
+
+<script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
+<script type='text/javascript'>
+	var initESW = function(gslbBaseURL) {
+		embedded_svc.settings.displayHelpButton = true; //Ou falso
+		embedded_svc.settings.language = 'PT-BR'; //Por exemplo, insira "pt" ou "pt-BR"
+
+		embedded_svc.settings.defaultMinimizedText = 'Fale Conosco!'; //(Assume como padrão o Chat com um especialista)
+		//embedded_svc.settings.disabledMinimizedText = '...'; //(Assume como padrão Agente off-line)
+
+		//embedded_svc.settings.loadingText = ''; //(Assume como padrão Carregando)
+		//embedded_svc.settings.storageDomain = 'yourdomain.com'; //(Define o domínio de sua implantação para que seus visitantes possam navegar em subdomínios durante uma sessão de chat)
+
+		// Configurações para Chat
+		//embedded_svc.settings.directToButtonRouting = function(prechatFormData) {
+			// Dynamically changes the button ID based on what the visitor enters in the pre-chat form.
+			// Returns a valid button ID.
+		//};
+		//embedded_svc.settings.prepopulatedPrechatFields = {}; //Define o preenchimento automático de campos de formulário de pré-chat
+		//embedded_svc.settings.fallbackRouting = []; //Uma matriz de IDs de botão, IDs de usuário ou userId_buttonId
+		//embedded_svc.settings.offlineSupportMinimizedText = '...'; //(Padronizado para Entre em contato conosco)
+
+		embedded_svc.settings.enabledFeatures = ['LiveAgent'];
+		embedded_svc.settings.entryFeature = 'LiveAgent';
+
+		embedded_svc.init(
+			'https://gruposotreq.my.salesforce.com',
+			'https://gruposotreq.secure.force.com/chat',
+			gslbBaseURL,
+			'00Df400000044h7',
+			'Chat',
+			{
+				baseLiveAgentContentURL: 'https://c.la4-c1-phx.salesforceliveagent.com/content',
+				deploymentId: '572f4000000MmBj',
+				buttonId: '573f4000000Ml9Y',
+				baseLiveAgentURL: 'https://d.la4-c1-phx.salesforceliveagent.com/chat',
+				eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04If40000004ICnEAM_17338d41a75',
+				isOfflineSupportEnabled: false
+			}
+		);
+	};
 	
-	<label for="first_name">Primeiro Nome</label><input  id="first_name" maxlength="40" name="first_name" size="20" type="text" /><br>
+	var OffinitESW = function(gslbBaseURL) {
+		embedded_svc.settings.displayHelpButton = true; //Ou falso
+		embedded_svc.settings.language = 'PT-BR'; //Por exemplo, insira "pt" ou "pt-BR"
 
-	<label for="last_name">Sobrenome</label><input  id="last_name" maxlength="80" name="last_name" size="20" type="text" /><br>
+		embedded_svc.settings.defaultMinimizedText = 'Fale Conosco!'; //(Assume como padrão o Chat com um especialista)
+		//embedded_svc.settings.disabledMinimizedText = '...'; //(Assume como padrão Agente off-line)
 
-	<label for="email">Email</label><input  id="email" maxlength="80" name="email" size="20" type="text" /><br>
+		//embedded_svc.settings.loadingText = ''; //(Assume como padrão Carregando)
+		//embedded_svc.settings.storageDomain = 'yourdomain.com'; //(Define o domínio de sua implantação para que seus visitantes possam navegar em subdomínios durante uma sessão de chat)
 
-	<label for="company">Empresa</label><input  id="company" maxlength="40" name="company" size="20" type="text" /><br>
+		// Configurações para Chat
+		//embedded_svc.settings.directToButtonRouting = function(prechatFormData) {
+			// Dynamically changes the button ID based on what the visitor enters in the pre-chat form.
+			// Returns a valid button ID.
+		//};
+		//embedded_svc.settings.prepopulatedPrechatFields = {}; //Define o preenchimento automático de campos de formulário de pré-chat
+		//embedded_svc.settings.fallbackRouting = []; //Uma matriz de IDs de botão, IDs de usuário ou userId_buttonId
+		//embedded_svc.settings.offlineSupportMinimizedText = '...'; //(Padronizado para Entre em contato conosco)
 
-	<label for="city">Cidade</label><input  id="city" maxlength="40" name="city" size="20" type="text" /><br>
+		embedded_svc.settings.enabledFeatures = ['LiveAgent'];
+		embedded_svc.settings.entryFeature = 'LiveAgent';
 
-	<label for="state">Estado/província</label><input  id="state" maxlength="20" name="state" size="20" type="text" /><br>
+		embedded_svc.init(
+			'https://gruposotreq.my.salesforce.com',
+			'https://gruposotreq.secure.force.com/chat',
+			gslbBaseURL,
+			'00Df400000044h7',
+			'Chat',
+			{
+				baseLiveAgentContentURL: 'https://c.la4-c1-phx.salesforceliveagent.com/content',
+				deploymentId: '572f4000000MmBj',
+				buttonId: '573f4000000Ml9Y',
+				baseLiveAgentURL: 'https://d.la4-c1-phx.salesforceliveagent.com/chat',
+				eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04If40000004ICnEAM_17338d41a75',
+				isOfflineSupportEnabled: true
+			}
+		);
+	}
+	
+	var Digital=new Date();
+	var hour = Digital.getHours();
+	var day = Digital.getDay();
 
-	<input type="submit" name="submit">
-
-	</form>
-
+	if (!window.embedded_svc) {
+		var s = document.createElement('script');
+		s.setAttribute('src', 'https://gruposotreq.my.salesforce.com/embeddedservice/5.0/esw.min.js');
+		s.onload = function() {
+			initESW(null);
+		};
+		document.body.appendChild(s);
+	} else {
+		if((day > 0 && day < 6) && (hour >= 8 && hour <= 18)){
+			initESW('https://service.force.com');
+		} else {
+			OffinitESW('https://service.force.com');
+		}
+		
+	}
+</script>
 	
 </body>
 </html>
